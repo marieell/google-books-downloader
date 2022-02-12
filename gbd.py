@@ -134,8 +134,10 @@ def get_cookie(url):
     
     for request in driver.requests:
         if request.headers:
-            if "Cookie" in request.headers.keys():
-                cookies.append(request.headers["Cookie"])
+            for k, v in request.headers.items():
+                if k.lower() == "cookie":
+                    cookies.append(v)
+                    break
 
     return cookies[0]
 
